@@ -51,7 +51,7 @@ public abstract class IGRequest<T extends IGResponse> {
     @SneakyThrows
     protected String mapQueryString(Object... strings) {
         StringBuilder builder = new StringBuilder("?");
-
+        log.info("Instagram4j mapQueryString Query string : {}", strings);
         for (int i = 0; i < strings.length; i += 2) {
             if (i + 1 < strings.length && strings[i] != null && strings[i + 1] != null
                     && !strings[i].toString().isEmpty()
@@ -60,8 +60,9 @@ public abstract class IGRequest<T extends IGResponse> {
                         .append(URLEncoder.encode(strings[i + 1].toString(), "utf-8")).append("&");
             }
         }
-
-        return builder.substring(0, builder.length() - 1);
+        String result = builder.substring(0, builder.length() - 1);
+        log.info("Instagram4j mapQueryString Query string : {}", result);
+        return result;
     }
 
     @SneakyThrows(IOException.class)

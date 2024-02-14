@@ -9,9 +9,18 @@ import lombok.Data;
 @Data
 public class FeedUsersResponse extends IGResponse implements IGPaginatedResponse {
     private List<Profile> users;
+    private String next_max_id;
     private String next_min_id;
 
+    public String getNextPaginationId() {
+        return next_max_id != null ? next_max_id : next_min_id;
+    }
+
+    public boolean shouldUseMaxId() {
+        return next_max_id != null;
+    }
+
     public boolean isMore_available() {
-        return next_min_id != null;
+        return getNextPaginationId() != null;
     }
 }
