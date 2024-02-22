@@ -131,6 +131,7 @@ public class IGClient implements Serializable {
 
             @Override
             public void onFailure(Call call, IOException exception) {
+                log.error("Request to {} failed: {}", call.request().url().toString(), exception.getMessage(), exception);
                 responseFuture.completeExceptionally(exception);
             }
 
@@ -154,6 +155,7 @@ public class IGClient implements Serializable {
                     return req.parseResponse(res);
                 })
                 .exceptionally((tr) -> {
+                    log.error("Request processing failed: {}", tr.getMessage(), tr);
                     return this.exceptionallyHandler.handle(tr, req.getResponseType());
                 });
     }
