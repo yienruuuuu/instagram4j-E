@@ -1,15 +1,5 @@
 package com.github.instagram4j.instagram4j;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.ObjectStreamException;
-import java.io.Serializable;
-import java.util.List;
-import java.util.Optional;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.CompletionException;
-import java.util.function.BiConsumer;
-import java.util.function.Consumer;
 import com.github.instagram4j.instagram4j.actions.IGClientActions;
 import com.github.instagram4j.instagram4j.exceptions.ExceptionallyHandler;
 import com.github.instagram4j.instagram4j.exceptions.IGLoginException;
@@ -26,20 +16,21 @@ import com.github.instagram4j.instagram4j.utils.IGUtils;
 import com.github.instagram4j.instagram4j.utils.SerializableCookieJar;
 import com.github.instagram4j.instagram4j.utils.SerializeUtil;
 import kotlin.Pair;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.Setter;
+import lombok.*;
 import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.CookieJar;
-import okhttp3.OkHttpClient;
-import okhttp3.Response;
-import okhttp3.ResponseBody;
+import okhttp3.*;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.ObjectStreamException;
+import java.io.Serializable;
+import java.util.List;
+import java.util.Optional;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CompletionException;
+import java.util.function.BiConsumer;
+import java.util.function.Consumer;
 
 @Data
 @Slf4j
@@ -148,10 +139,9 @@ public class IGClient implements Serializable {
         return responseFuture
                 .thenApply(res -> {
                     setFromResponseHeaders(res.getFirst());
-                    log.info("Response for {} with body (truncated) : {}",
+                    log.info("Response for {} with body : {}",
                             res.getFirst().request().url(),
-                            IGUtils.truncate(res.getSecond()));
-
+                            res.getSecond());
                     return req.parseResponse(res);
                 })
                 .exceptionally((tr) -> {
@@ -207,7 +197,7 @@ public class IGClient implements Serializable {
     }
 
     public static IGClient deserialize(File clientFile, File cookieFile,
-            OkHttpClient.Builder clientBuilder) throws ClassNotFoundException, IOException {
+                                       OkHttpClient.Builder clientBuilder) throws ClassNotFoundException, IOException {
         IGClient client = SerializeUtil.deserialize(clientFile, IGClient.class);
         CookieJar jar = SerializeUtil.deserialize(cookieFile, SerializableCookieJar.class);
 
