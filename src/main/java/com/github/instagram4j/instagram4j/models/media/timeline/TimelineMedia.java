@@ -29,7 +29,7 @@ public class TimelineMedia extends Media {
     private int fb_play_count;
     private int like_count;
     private int fb_like_count;
-    private int rershare_count;
+    private int reshare_count;
     private int comment_count;
     private int number_of_qualities;
     private Location location;
