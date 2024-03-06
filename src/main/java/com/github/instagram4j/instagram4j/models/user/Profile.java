@@ -1,10 +1,11 @@
 package com.github.instagram4j.instagram4j.models.user;
 
-import java.io.Serializable;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.github.instagram4j.instagram4j.models.IGBaseModel;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+
+import java.io.Serializable;
 
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
@@ -21,5 +22,5 @@ public class Profile extends IGBaseModel implements Serializable {
     @JsonProperty("is_verified")
     private boolean is_verified;
     private boolean has_anonymous_profile_picture;
-    private Long latest_reel_media;
+    private long latest_reel_media;
 }

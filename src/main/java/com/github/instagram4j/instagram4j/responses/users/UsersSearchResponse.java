@@ -3,9 +3,9 @@ package com.github.instagram4j.instagram4j.responses.users;
 import com.github.instagram4j.instagram4j.models.friendships.Friendship;
 import com.github.instagram4j.instagram4j.models.user.Profile;
 import com.github.instagram4j.instagram4j.responses.IGResponse;
-import java.util.List;
-
 import lombok.Data;
+
+import java.util.List;
 
 @Data
 public class UsersSearchResponse extends IGResponse {
@@ -22,7 +22,7 @@ public class UsersSearchResponse extends IGResponse {
         String social_context;
         String search_social_context;
         int mutual_followers_count;
-        int latest_reel_media;
+        long latest_reel_media;
     }
 
 }
